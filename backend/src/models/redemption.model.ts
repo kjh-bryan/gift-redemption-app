@@ -7,13 +7,13 @@ import { Team } from "./team.model";
 export interface RedemptionAttributes {
   gift_name: ForeignKey<number>;
   team_name: string;
-  redeemed_at: string;
+  redeemed_at: Date;
 }
 
 export class Redemption extends Model<RedemptionAttributes> {
   declare gift_name: ForeignKey<Gift["gift_name"]>;
   declare team_name: ForeignKey<Team["team_name"]>;
-  declare created_at: Date;
+  declare redeemed_at: Date;
 }
 
 Redemption.init(

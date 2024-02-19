@@ -5,8 +5,8 @@ const PORT = process.env.PORT || 5000;
 
 (async () => {
   try {
-    await sequelize.sync();
     // await sequelize.sync({ force: true });
+    await sequelize.sync({ force: true });
     intialiseTable();
     await intialiseData();
     app.listen(PORT, () => {

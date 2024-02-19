@@ -1,10 +1,10 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { CreationOptional, DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../connections/db";
 import { v4 as uuidv4 } from "uuid";
 
 export interface GiftAttributes {
   gift_name: string;
-  created_at: string;
+  created_at?: Date;
 }
 
 export class Gift extends Model<GiftAttributes> {
@@ -21,6 +21,7 @@ Gift.init(
     },
     created_at: {
       type: DataTypes.DATE,
+      defaultValue: sequelize.fn("NOW"),
       allowNull: false,
     },
   },

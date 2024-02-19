@@ -35,6 +35,15 @@ export const intialiseData = async () => {
     if (userTeamCount === 0) {
       await UserTeam.bulkCreate(user_teams);
     }
+
+    const giftCount = await Gift.count();
+    if (giftCount === 0) {
+      await Gift.bulkCreate([
+        { gift_name: "Books Gift Voucher Feb 2024" },
+        { gift_name: "Movie Tickets Mar 2024" },
+        { gift_name: "Amazon Gift Card Apr 2024" },
+      ]);
+    }
   } catch (error) {
     console.error("Error initializing data:", error);
   }
