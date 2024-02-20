@@ -1,13 +1,4 @@
-import { Gift, Redemption, UserTeam } from "../models"; // Import your Sequelize model here
-
-export const getUserTeamByStaffIdService = async (staffPassId: string) => {
-  const userTeam = await UserTeam.findOne({
-    where: { staff_pass_id: staffPassId.trim() },
-  });
-
-  if (userTeam) return userTeam;
-  return null;
-};
+import { Redemption } from "../models"; // Import your Sequelize model here
 
 export const verifyRedemptionStatusService = async (
   gift_name: string,
@@ -22,13 +13,6 @@ export const verifyRedemptionStatusService = async (
     console.error("Error fetching past redemptions:", error);
     return false;
   }
-};
-
-export const getGiftsService = async () => {
-  const gifts = await Gift.findAll();
-
-  if (gifts) return gifts;
-  return null;
 };
 
 export const redeemGiftService = async (
