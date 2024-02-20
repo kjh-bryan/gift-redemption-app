@@ -5,7 +5,7 @@ import { Gift } from "./gift.model";
 import { Team } from "./team.model";
 
 export interface RedemptionAttributes {
-  gift_name: ForeignKey<number>;
+  gift_name: ForeignKey<string>;
   team_name: string;
   redeemed_at: Date;
 }
