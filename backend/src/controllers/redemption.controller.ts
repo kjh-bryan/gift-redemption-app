@@ -32,7 +32,6 @@ export const verifyRedemptionController = async (
 export const redeemGiftController = async (req: Request, res: Response) => {
   try {
     const { gift_name, team_name } = req.body;
-
     const canRedeem = await verifyRedemptionStatusService(gift_name, team_name);
 
     if (canRedeem) {

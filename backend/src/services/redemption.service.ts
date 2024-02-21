@@ -18,7 +18,7 @@ export const verifyRedemptionStatusService = async (
 export const redeemGiftService = async (
   gift_name: string,
   team_name: string,
-) => {
+): Promise<Redemption | null> => {
   const redemption = await Redemption.create({
     gift_name,
     team_name,

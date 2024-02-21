@@ -1,17 +1,17 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, ForeignKey, Model, Optional } from "sequelize";
 import { sequelize } from "../connections/db";
-import { v4 as uuidv4 } from "uuid";
+import { Role } from "./role.model";
 
 export interface UserAttributes {
   username: string;
   password: string;
-  role: string;
+  role_name: string;
 }
 
 export class User extends Model<UserAttributes> {
   declare username: string;
   declare password: string;
-  declare role: string;
+  declare role_name: ForeignKey<Role["role_name"]>;
 }
 
 User.init(
@@ -25,7 +25,7 @@ User.init(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    role: {
+    role_name: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },

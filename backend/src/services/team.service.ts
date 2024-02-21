@@ -1,7 +1,6 @@
-import { Model } from "sequelize";
-import { Team } from "../models"; // Import your Sequelize model here
+import { Team } from "../models";
 
-export const getAllTeamsService = async (): Promise<Model[] | null> => {
+export const getAllTeamsService = async (): Promise<Team[] | null> => {
   const teams = await Team.findAll({
     where: {},
   });

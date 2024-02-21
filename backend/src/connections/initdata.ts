@@ -1,15 +1,21 @@
 import { Gift } from "../models/gift.model";
 import { Team } from "../models/team.model";
-import { User } from "../models/user.model";
+import { User, UserAttributes } from "../models/user.model";
 import { UserTeam } from "../models/user-team.model";
 import { Redemption } from "../models/redemption.model";
 import { csvToDb } from "../utils/csv-to-db";
+import { Role } from "../models";
+import bcrypt from "bcryptjs";
 
-export const intialiseTable = () => {
+export const intialiseAssociations = async () => {
+  console.log("Defining Table Associations");
   User.hasMany(UserTeam, { foreignKey: "staff_pass_id" });
   Team.hasMany(UserTeam, { foreignKey: "team_name" });
   UserTeam.belongsTo(User, { foreignKey: "staff_pass_id" });
   UserTeam.belongsTo(Team, { foreignKey: "team_name" });
+
+  User.belongsTo(Role, { foreignKey: "role_name", targetKey: "role_name" });
+  Role.hasOne(User, { foreignKey: "role_name", sourceKey: "role_name" });
 
   Team.hasMany(Redemption, { foreignKey: "team_name" });
   Redemption.belongsTo(Team, { foreignKey: "team_name" });
@@ -19,16 +25,28 @@ export const intialiseTable = () => {
 };
 
 export const intialiseData = async () => {
+  console.log("Intialising Data");
+
   try {
-    const { users, teams, user_teams } = await csvToDb();
+    const { users, roles, teams, user_teams } = await csvToDb();
+
+    const roleCount = await Role.count();
+    console.log("roleCount : ", roleCount);
+    if (roleCount === 0) {
+      await Role.bulkCreate(roles);
+    }
     const userCount = await User.count();
+    console.log("userCount : ", userCount);
     if (userCount === 0) {
-      await User.bulkCreate(users);
+      const hashedUsers = await hashUserPasswords(users);
+
+      console.log("done");
+      await User.bulkCreate(hashedUsers);
     }
 
     const teamCount = await Team.count();
     if (teamCount === 0) {
-      await Team.bulkCreate(teams);
+      await Team.bulkCreate([...teams, { team_name: "UNASSIGNED" }]);
     }
 
     const userTeamCount = await UserTeam.count();
@@ -46,5 +64,29 @@ export const intialiseData = async () => {
     }
   } catch (error) {
     console.error("Error initializing data:", error);
+  }
+};
+
+export const hashUserPasswords = async (users: UserAttributes[]) => {
+  try {
+    const hashedUsers = [];
+    const hashedPasswords: Record<string, string> = {};
+    for (const user of users) {
+      let hashedPassword = "";
+      if (hashedPasswords[user.password] == undefined) {
+        hashedPassword = await bcrypt.hash(user.password, 10);
+        hashedPasswords[user.password] = hashedPassword;
+      } else {
+        hashedPassword = hashedPasswords[user.password];
+      }
+      hashedUsers.push({
+        ...user,
+        password: hashedPassword,
+      });
+    }
+
+    return hashedUsers;
+  } catch (error) {
+    throw new Error("Error hashing passwords: " + error);
   }
 };

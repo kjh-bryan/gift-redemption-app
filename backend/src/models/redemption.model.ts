@@ -1,13 +1,12 @@
 import { DataTypes, ForeignKey, Model, Optional } from "sequelize";
 import { sequelize } from "../connections/db";
-import { v4 as uuidv4 } from "uuid";
 import { Gift } from "./gift.model";
 import { Team } from "./team.model";
 
 export interface RedemptionAttributes {
-  gift_name: ForeignKey<string>;
+  gift_name: string;
   team_name: string;
-  redeemed_at: Date;
+  redeemed_at?: Date;
 }
 
 export class Redemption extends Model<RedemptionAttributes> {
@@ -30,6 +29,7 @@ Redemption.init(
     },
     redeemed_at: {
       type: DataTypes.DATE,
+      defaultValue: sequelize.fn("NOW"),
       allowNull: false,
     },
   },

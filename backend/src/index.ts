@@ -1,13 +1,14 @@
 import app from "./app";
 import { sequelize } from "./connections/db";
-import { intialiseData, intialiseTable } from "./connections/initdata";
-const PORT = process.env.PORT || 5000;
+import { intialiseData, intialiseAssociations } from "./connections/initdata";
+import config from "./config/default";
+
+const PORT = config.PORT || 6000;
 
 (async () => {
   try {
-    // await sequelize.sync({ force: true });
+    await intialiseAssociations();
     await sequelize.sync({ force: true });
-    intialiseTable();
     await intialiseData();
     app.listen(PORT, () => {
       console.log(`Server has started at http://localhost:${PORT}`);
