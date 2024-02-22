@@ -6,7 +6,6 @@ import {
   publicRoutes,
   apiAuthPrefix,
 } from "@/routes";
-import { NextAuthRequest } from "next-auth/lib";
 
 const { auth } = NextAuth(authConfig);
 export default auth((req: any): any => {
