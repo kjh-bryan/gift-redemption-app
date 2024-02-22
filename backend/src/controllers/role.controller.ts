@@ -8,9 +8,11 @@ export const getAllRolesController = async (req: Request, res: Response) => {
     if (!roles) {
       return res.status(404).json({ message: "Roles Not Found" });
     }
+
+    const responseData = roles.filter((role) => role.role_name !== "ADMIN");
     return res.status(200).json({
       message: "Success",
-      data: roles,
+      data: responseData,
     });
   } catch (error) {
     console.error("Error fetching all roles: ", error);

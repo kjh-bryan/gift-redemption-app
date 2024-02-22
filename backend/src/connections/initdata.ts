@@ -31,16 +31,20 @@ export const intialiseData = async () => {
     const { users, roles, teams, user_teams } = await csvToDb();
 
     const roleCount = await Role.count();
-    console.log("roleCount : ", roleCount);
     if (roleCount === 0) {
-      await Role.bulkCreate(roles);
+      await Role.bulkCreate([...roles, { role_name: "ADMIN" }]);
     }
     const userCount = await User.count();
-    console.log("userCount : ", userCount);
     if (userCount === 0) {
-      const hashedUsers = await hashUserPasswords(users);
+      const hashedUsers = await hashUserPasswords([
+        ...users,
+        {
+          username: "ADMIN",
+          password: "admin",
+          role_name: "ADMIN",
+        },
+      ]);
 
-      console.log("done");
       await User.bulkCreate(hashedUsers);
     }
 

@@ -3,17 +3,23 @@ import {
   redeemGiftController,
   verifyRedemptionController,
 } from "../controllers/redemption.controller";
-import { getAllGiftsController } from "../controllers/gift.controller";
+import {
+  createGiftController,
+  getAllGiftsController,
+} from "../controllers/gift.controller";
 import { validateSchema } from "../middleware/validateSchema";
-import { RedemptionDTO } from "../dto/redemption.dto";
+import { RedemptionDTO, VerifyRedemptionDTO } from "../dto/redemption.dto";
+import { CreateGiftDTO } from "../dto/gift.dto";
 
 const router = express.Router();
 
 router.get("/", getAllGiftsController);
 
+router.post("/", validateSchema(CreateGiftDTO), createGiftController);
+
 router.get(
   "/verify-team",
-  validateSchema(RedemptionDTO),
+  validateSchema(VerifyRedemptionDTO),
   verifyRedemptionController,
 );
 

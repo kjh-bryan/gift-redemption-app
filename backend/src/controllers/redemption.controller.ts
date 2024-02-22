@@ -39,7 +39,7 @@ export const redeemGiftController = async (req: Request, res: Response) => {
       if (!redemption)
         return res.status(400).json({ message: "Unable to create redemption" });
 
-      // return res.status(200).json({ message: "Successfully redeemed" });
+      return res.status(200).json({ message: "Successfully redeemed" });
     } else {
       return res.status(400).json({ message: "Already redeemed" });
     }
