@@ -1,5 +1,19 @@
 import { Op } from "sequelize";
-import { User } from "../models";
+import { User, UserTeam } from "../models";
+
+export const getAllUserService = async (): Promise<any> => {
+  const user = await User.findAll({
+    include: [
+      {
+        model: UserTeam,
+        attributes: ["team_name", "created_at"],
+      },
+    ],
+  });
+
+  if (user) return user;
+  return null;
+};
 
 export const getUserByUsernameService = async (
   username: string,

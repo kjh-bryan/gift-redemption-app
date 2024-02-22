@@ -1,7 +1,8 @@
 import { Op } from "sequelize";
-import { User } from "../../../src/models";
+import { User, UserTeam } from "../../../src/models";
 import {
   createUserService,
+  getAllUserService,
   getUserByUsernameService,
 } from "../../../src/services/user.service";
 
@@ -9,10 +10,77 @@ jest.mock("../../../src/models", () => ({
   User: {
     findOne: jest.fn(),
     create: jest.fn(),
+    findAll: jest.fn(),
   },
 }));
 
 describe("User Service", () => {
+  describe("getAllUserService", () => {
+    it("should return all users with their teams", async () => {
+      // Mock the data returned by findAll method
+      const mockUsers = [
+        {
+          username: "user1",
+          // other user properties
+          UserTeams: [
+            {
+              team_name: "team1",
+              created_at: "2021-01-01",
+            },
+          ],
+        },
+        {
+          username: "user2",
+          // other user properties
+          UserTeams: [
+            {
+              team_name: "team2",
+              created_at: "2021-02-02",
+            },
+          ],
+        },
+      ];
+      // Mock the implementation of findAll method to return the mockUsers
+      (User.findAll as jest.MockedFunction<any>).mockResolvedValue(mockUsers);
+
+      // Call the service function
+      const result = await getAllUserService();
+
+      // Assert that findAll method was called with correct options
+      expect(User.findAll).toHaveBeenCalledWith({
+        include: [
+          {
+            model: UserTeam,
+            attributes: ["team_name", "created_at"],
+          },
+        ],
+      });
+
+      // Assert that the result matches the expected data
+      expect(result).toEqual(mockUsers);
+    });
+
+    it("should return null if no users are found", async () => {
+      // Mock the implementation of findAll method to return an empty array
+      (User.findAll as jest.MockedFunction<any>).mockResolvedValue(null);
+
+      // Call the service function
+      const result = await getAllUserService();
+
+      // Assert that findAll method was called with correct options
+      expect(User.findAll).toHaveBeenCalledWith({
+        include: [
+          {
+            model: UserTeam,
+            attributes: ["team_name", "created_at"],
+          },
+        ],
+      });
+
+      // Assert that the result is null
+      expect(result).toBeNull();
+    });
+  });
   describe("getUserByUsernameService", () => {
     it("should return user if found", async () => {
       const mockUser = {

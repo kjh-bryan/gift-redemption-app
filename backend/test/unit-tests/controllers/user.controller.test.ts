@@ -1,5 +1,6 @@
 import {
   createUserController,
+  getAllUserController,
   getUserByUsernameController,
   loginController,
 } from "../../../src/controllers/user.controller";
@@ -9,6 +10,7 @@ import {
 } from "../../../src/services/user-team.service";
 import {
   createUserService,
+  getAllUserService,
   getUserByUsernameService,
 } from "../../../src/services/user.service";
 import { mockedData } from "../../helpers/mock-data";
@@ -29,6 +31,7 @@ jest.mock("../../../src/services/user.service", () => {
   return {
     getUserByUsernameService: jest.fn(),
     createUserService: jest.fn(),
+    getAllUserService: jest.fn(),
   };
 });
 
@@ -40,6 +43,72 @@ jest.mock("../../../src/services/user-team.service", () => {
 });
 
 describe("User Controller", () => {
+  describe("getAllUserController", () => {
+    beforeAll(() => {
+      jest.spyOn(console, "error").mockImplementation(() => {});
+    });
+    afterAll(() => {
+      (console.error as jest.MockedFunction<any>).mockRestore();
+    });
+
+    afterEach(() => {
+      (console.error as jest.MockedFunction<any>).mockClear();
+    });
+
+    it("should return 200 OK and users", async () => {
+      const mockedUnflatteredUsers = mockedData.unflatteredUsers;
+      const mockedFlatteredUsers = mockedData.flatteredUsers;
+      const req: any = {};
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getAllUserService as jest.MockedFunction<any>).mockResolvedValue(
+        mockedUnflatteredUsers,
+      );
+
+      await getAllUserController(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Success",
+        data: mockedFlatteredUsers,
+      });
+    });
+
+    it("should return 401 NOT FOUND if no users return", async () => {
+      const req: any = {};
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getAllUserService as jest.MockedFunction<any>).mockResolvedValue(null);
+      await getAllUserController(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Users Not Found",
+      });
+    });
+    it("should return 500 Internal Server Error if an error occurs", async () => {
+      const req: any = {};
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getAllUserService as jest.MockedFunction<any>).mockRejectedValue(
+        new Error("Error"),
+      );
+
+      await getAllUserController(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+    });
+  });
   describe("getUserByUsernameController", () => {
     beforeAll(() => {
       jest.spyOn(console, "error").mockImplementation(() => {});

@@ -65,4 +65,40 @@ export const mockedData = {
       team_name: "RAVENCLAW",
     },
   ],
+  flatteredUsers: [
+    {
+      username: "BOSS_6FDFMJGFV6YM",
+      role_name: "BOSS",
+      team_name: "GRYFFINDOR",
+      created_at: "2021-05-11T19:39:25.320Z",
+    },
+    {
+      username: "MANAGER_P49NK2CS3B5G",
+      role_name: "MANAGER",
+      team_name: "GRYFFINDOR",
+      created_at: "2021-03-03T15:18:30.249Z",
+    },
+  ],
+  unflatteredUsers: [
+    {
+      username: "BOSS_6FDFMJGFV6YM",
+      role_name: "BOSS",
+      UserTeams: [
+        {
+          team_name: "GRYFFINDOR",
+          created_at: "2021-05-11T19:39:25.320Z",
+        },
+      ],
+    },
+    {
+      username: "MANAGER_P49NK2CS3B5G",
+      role_name: "MANAGER",
+      UserTeams: [
+        {
+          team_name: "GRYFFINDOR",
+          created_at: "2021-03-03T15:18:30.249Z",
+        },
+      ],
+    },
+  ],
 };

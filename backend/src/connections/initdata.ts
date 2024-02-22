@@ -50,12 +50,19 @@ export const intialiseData = async () => {
 
     const teamCount = await Team.count();
     if (teamCount === 0) {
-      await Team.bulkCreate([...teams, { team_name: "UNASSIGNED" }]);
+      await Team.bulkCreate([
+        ...teams,
+        { team_name: "UNASSIGNED" },
+        { team_name: "ADMINISTRATOR" },
+      ]);
     }
 
     const userTeamCount = await UserTeam.count();
     if (userTeamCount === 0) {
-      await UserTeam.bulkCreate(user_teams);
+      await UserTeam.bulkCreate([
+        ...user_teams,
+        { team_name: "ADMINISTRATOR", staff_pass_id: "ADMIN" },
+      ]);
     }
 
     const giftCount = await Gift.count();

@@ -11,7 +11,7 @@ jest.mock("../../../src/models", () => ({
   },
 }));
 
-describe("User Service", () => {
+describe("UserTeam Service", () => {
   describe("getUserTeamByStaffIdService", () => {
     it("should return user team if found", async () => {
       const mockUserTeam = {

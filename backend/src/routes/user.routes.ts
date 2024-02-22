@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createUserController,
+  getAllUserController,
   getUserByUsernameController,
   loginController,
 } from "../controllers/user.controller";
@@ -11,6 +12,7 @@ const router = express.Router();
 
 router.post("/register", validateSchema(RegisterUserDTO), createUserController);
 router.post("/login", validateSchema(LoginUserDTO), loginController);
+router.get("/", getAllUserController);
 router.get(
   "/:username",
   validateSchema(UsernameDTO),

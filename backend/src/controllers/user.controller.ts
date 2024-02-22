@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createUserService,
+  getAllUserService,
   getUserByUsernameService,
 } from "../services/user.service";
 import {
@@ -10,6 +11,35 @@ import {
 import bcrypt from "bcryptjs";
 import config from "../config/default";
 import jwt from "jsonwebtoken";
+
+export const getAllUserController = async (req: Request, res: Response) => {
+  try {
+    const users = await getAllUserService();
+    if (!users) {
+      return res.status(401).json({ message: "Users Not Found" });
+    }
+
+    const flattenedUsers = users.map((user: any) => {
+      const { username, password, role_name, UserTeams } = user;
+
+      const { team_name, created_at } = UserTeams[0]; // Assuming each user has only one team
+      return {
+        username,
+        role_name,
+        team_name: team_name ?? "UNASSIGNED",
+        created_at,
+      };
+    });
+    // console.log(flattenedUsers);
+    return res.status(200).json({
+      message: "Success",
+      data: flattenedUsers,
+    });
+  } catch (error) {
+    console.error("Error fetching users detail: ", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 export const getUserByUsernameController = async (
   req: Request,
