@@ -64,6 +64,7 @@ export const RegisterForm = () => {
   useEffect(() => {
     (async () => {
       const teamData = await getAllTeams();
+      console.log("teamData", teamData);
       if (teamData.status === 200) {
         setTeamOptions(teamData.data.data);
       }
@@ -99,14 +100,15 @@ export const RegisterForm = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {roleOptions.map((option) => (
-                          <SelectItem
-                            key={option.role_name}
-                            value={option.role_name}
-                          >
-                            {option.role_name}
-                          </SelectItem>
-                        ))}
+                        {roleOptions &&
+                          roleOptions.map((option) => (
+                            <SelectItem
+                              key={option.role_name}
+                              value={option.role_name}
+                            >
+                              {option.role_name}
+                            </SelectItem>
+                          ))}
                       </SelectContent>
                     </Select>
 
@@ -185,14 +187,15 @@ export const RegisterForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {teamOptions.map((option) => (
-                        <SelectItem
-                          key={option.team_name}
-                          value={option.team_name}
-                        >
-                          {option.team_name}
-                        </SelectItem>
-                      ))}
+                      {teamOptions &&
+                        teamOptions.map((option) => (
+                          <SelectItem
+                            key={option.team_name}
+                            value={option.team_name}
+                          >
+                            {option.team_name}
+                          </SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
