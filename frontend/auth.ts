@@ -12,12 +12,6 @@ export const {
     signIn: "/login",
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   const existingUser = await getUserByUsername(user.username);
-    //   if (existingUser.data.message === "User Not Found") {
-    //     return false;
-    //   }
-    // },
     async jwt({ token, user }) {
       return { ...token, ...user };
     },

@@ -42,6 +42,7 @@ export default {
           const { username, password } = validatedFields.data;
 
           const user = await getUserByUsername(username);
+
           if (!user.data.data) return null;
           const passwordMatch = await bcrypt.compare(
             password,
