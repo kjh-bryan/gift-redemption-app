@@ -22,3 +22,8 @@ export interface RegisterProps {
   team_name: string;
   role_name: string;
 }
+
+export interface GiftProps {
+  gift_name: string;
+  created_at: Date;
+}

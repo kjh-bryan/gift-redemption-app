@@ -25,6 +25,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     team_name,
     role_name,
   });
+
   console.log("registeredUser :", registeredUser);
   if (registeredUser.status === 401 || registeredUser.status === 402) {
     return { error: "Unable to register!" };

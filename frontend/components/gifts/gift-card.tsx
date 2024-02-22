@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { DotLoaderOverlay } from "react-spinner-overlay";
 import {
   CardContent,
   CardFooter,
@@ -7,29 +8,79 @@ import {
   Card,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { redeemGift, verifyRedemption } from "@/app/api/redemption";
+import { toast } from "sonner";
 
 export type CardProps = {
-  title: string;
+  gift_name: string;
+  team_name: string;
   image?: string;
-  onRedeem?: () => {};
 };
 
 export default function GiftCard(props: CardProps) {
+  const [canRedeem, setCanRedeem] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    (async () => {
+      const canRedeemResponse = await verifyRedemption({
+        gift_name: props.gift_name,
+        team_name: props.team_name || "",
+      });
+      console.log("canRedeemResponse ", canRedeemResponse.data);
+      setCanRedeem(canRedeemResponse.data.canRedeem);
+      console.log("canRedeem ", canRedeem);
+      if (canRedeem !== null) {
+        setIsLoading(false);
+      }
+    })();
+  }, [canRedeem]);
+
+  const handleRedeemGift = async () => {
+    const redeemGiftResponse = await redeemGift({
+      gift_name: props.gift_name,
+      team_name: props.team_name,
+    });
+    console.log("redeemGiftResponse", redeemGiftResponse.data);
+    if (redeemGiftResponse.status === 200) {
+      setCanRedeem(false);
+      toast("Gift has been redeemed.");
+    }
+  };
   return (
-    <Card className="lg:max-w-md w-full">
-      <CardHeader>
-        <CardTitle>{props.title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <img
-          src="https://cdn.pixabay.com/photo/2023/03/16/16/49/watercolor-7857103_640.png"
-          alt="Card Image"
-          className="w-full"
-        />
-      </CardContent>
-      <CardFooter>
-        <Button variant="default">Redeem</Button>
-      </CardFooter>
-    </Card>
+    <>
+      {isLoading ? (
+        <DotLoaderOverlay color="#000" loading={isLoading} />
+      ) : (
+        <Card className="lg:max-w-md w-full">
+          <CardHeader>
+            <CardTitle>{props.gift_name}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Image
+              src={
+                canRedeem
+                  ? "/images/gift_unredeemed.png"
+                  : "/images/gift_redeemed.png"
+              }
+              alt="Card Image"
+              className="w-full"
+              width={300}
+              height={300}
+            />
+          </CardContent>
+          <CardFooter>
+            <Button
+              disabled={!canRedeem}
+              onClick={handleRedeemGift}
+              variant="default"
+            >
+              Redeem
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+    </>
   );
 }

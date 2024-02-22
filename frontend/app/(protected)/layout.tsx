@@ -2,9 +2,10 @@ import SideNavbar from "@/components/dashboard/side-nav-bar";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Inter } from "next/font/google";
+import { redirect } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
-const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
+const ProtectedLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       className={cn(

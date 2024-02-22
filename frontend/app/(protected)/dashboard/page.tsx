@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { LoginForm } from "@/components/auth/login-form";
 import BarChart from "@/components/dashboard/bar-chart";
 import Card, { CardContent, CardProps } from "@/components/dashboard/card";
@@ -5,6 +6,7 @@ import PageTitle from "@/components/dashboard/page-title";
 import SalesCard, { SalesProps } from "@/components/dashboard/sales-card";
 import SideNavbar from "@/components/dashboard/side-nav-bar";
 import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const cardData: CardProps[] = [
@@ -62,7 +64,9 @@ const uesrSalesData: SalesProps[] = [
   },
 ];
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const session = await auth();
+  console.log("session", session);
   return (
     <div className="flex flex-col gap-5  w-full">
       <PageTitle title="Dashboard" />
