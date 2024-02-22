@@ -47,7 +47,7 @@ During the Christmas season, distributing gifts to teams within a department is 
 - [![Express][express.dev]][express-url]
 - ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) Hosted on ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 - [![NodeJS][node.dev]][node-url] Hosted on (https://render.com)
-- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) Hosted on (https://render.com)
 - ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
 
 ### Additional Features
