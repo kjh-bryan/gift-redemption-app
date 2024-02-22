@@ -16,7 +16,6 @@ export const verifyRedemption = async (payload: RedemptionProps) => {
 };
 
 export const redeemGift = async (payload: RedemptionProps) => {
-  console.log("redeemgift : redemption paload", payload);
   return await axios.post(REDEEM_GIFT_ENDPOINT, payload, {
     headers: {
       Authorization: `Bearer ${await getServerToken()}`,

@@ -40,7 +40,6 @@ export default function CreateGiftCard({ setGifts }: CardProps) {
     try {
       const giftData = await createGift(giftName);
       if (giftData.status === 200) {
-        console.log("giftData.data.data : ", giftData.data.data);
         setGifts((prevGifts) => [...prevGifts, giftData.data.data]);
         setOpen(false);
         setError(false);

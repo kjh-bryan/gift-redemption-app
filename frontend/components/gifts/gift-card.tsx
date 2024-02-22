@@ -28,9 +28,7 @@ export default function GiftCard(props: CardProps) {
         gift_name: props.gift_name,
         team_name: props.team_name || "",
       });
-      console.log("canRedeemResponse ", canRedeemResponse.data);
       setCanRedeem(canRedeemResponse.data.canRedeem);
-      console.log("canRedeem ", canRedeem);
       if (canRedeem !== null) {
         setIsLoading(false);
       }
@@ -42,7 +40,6 @@ export default function GiftCard(props: CardProps) {
       gift_name: props.gift_name,
       team_name: props.team_name,
     });
-    console.log("redeemGiftResponse", redeemGiftResponse.data);
     if (redeemGiftResponse.status === 200) {
       setCanRedeem(false);
       toast("Gift has been redeemed.");

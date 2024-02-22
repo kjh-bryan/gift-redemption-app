@@ -64,7 +64,6 @@ export const RegisterForm = () => {
   useEffect(() => {
     (async () => {
       const teamData = await getAllTeams();
-      console.log("teamData", teamData);
       if (teamData.status === 200) {
         setTeamOptions(teamData.data.data);
       }

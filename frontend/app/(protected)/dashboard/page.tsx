@@ -66,7 +66,6 @@ const uesrSalesData: SalesProps[] = [
 
 const DashboardPage = async () => {
   const session = await auth();
-  console.log("session", session);
   return (
     <div className="flex flex-col gap-5  w-full">
       <PageTitle title="Dashboard" />
