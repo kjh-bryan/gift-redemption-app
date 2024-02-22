@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "@/components/ui/nav";
 
 import {
@@ -19,39 +19,42 @@ import { cn } from "@/lib/utils";
 import SideNavProfile from "./side-nav-bar-profile";
 import { useSession } from "next-auth/react";
 
+export type NavLink = {
+  title: string;
+  label?: string;
+  icon: LucideIcon;
+  variant: "default" | "ghost";
+  href: string;
+  role: string;
+};
+
+const initialLinks: NavLink[] = [
+  {
+    title: "Dashboard",
+    icon: LayoutDashboard,
+    href: "/dashboard",
+    variant: "default",
+    role: "public",
+  },
+  {
+    title: "Gifts",
+    icon: Gift,
+    href: "/gifts",
+    variant: "ghost",
+    role: "public",
+  },
+  {
+    title: "Logout",
+    href: "/logout",
+    icon: LogOut,
+    variant: "ghost",
+    role: "public",
+  },
+];
+
 export default function SideNavbar() {
-  const [links, setLinks] = React.useState<
-    {
-      title: string;
-      label?: string;
-      icon: LucideIcon;
-      variant: "default" | "ghost";
-      href: string;
-      role: string;
-    }[]
-  >([
-    {
-      title: "Dashboard",
-      icon: LayoutDashboard,
-      href: "/dashboard",
-      variant: "default",
-      role: "public",
-    },
-    {
-      title: "Gifts",
-      icon: Gift,
-      href: "/gifts",
-      variant: "ghost",
-      role: "public",
-    },
-    {
-      title: "Logout",
-      href: "/logout",
-      icon: LogOut,
-      variant: "ghost",
-      role: "public",
-    },
-  ]);
+  const [links, setLinks] = useState<NavLink[]>(initialLinks);
+
   const session = useSession();
   const [isCollapsed, setIsCollapsed] = React.useState(false);
 
