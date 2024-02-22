@@ -140,7 +140,9 @@ During the Christmas season, distributing gifts to teams within a department is 
 | <img src="screensimages/18_Database_RedemptionData.png" > |
 
 To have a better view of Gift Redemption App's functionalities, please visit this live [website](https://gift-redemption-app.vercel.app/).
+
 Please take note while trying out due to limited resources, request from backend may be delayed
+
 ![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/8558c77c-a821-4941-b6b2-0cd1c7c634cb)
 
 
