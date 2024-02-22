@@ -20,11 +20,9 @@ export const validateSchema =
           error: err,
         });
       } else if (error instanceof Error) {
-        const err = error as Error & { statusCode?: number };
-        res.status(err.statusCode ?? 400).json({
-          message: err.message,
+        return res.status(400).json({
+          message: "Something went wrong",
         });
-        return;
       }
       res.status(500).json({
         message: "Internal server error",
