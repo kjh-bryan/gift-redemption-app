@@ -20,7 +20,13 @@ export default auth((req: any): any => {
   if (isApiAuthRoute) {
     return null;
   }
-
+  if (isPublicRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL("/dashboard", nextUrl));
+    } else {
+      return Response.redirect(new URL("/login", nextUrl));
+    }
+  }
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
@@ -30,7 +36,7 @@ export default auth((req: any): any => {
   }
 
   if (!isLoggedIn) {
-    return Response.redirect(new URL("/login/", nextUrl));
+    return Response.redirect(new URL("/login", nextUrl));
   }
   return null;
 });
@@ -41,7 +47,6 @@ export default auth((req: any): any => {
 export const config = {
   matcher: [
     "/((?!.+\\.[\\w]+$|_next).*)",
-    "/",
     "/(api|trpc)(.*)",
     "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
