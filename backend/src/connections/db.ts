@@ -1,12 +1,14 @@
 import { Sequelize } from "sequelize";
 
+import config from "../config/default";
+
 const sequelize = new Sequelize({
-  host: "localhost",
+  host: config.POSTGRESQL_HOST,
   dialect: "postgres",
-  database: "postgres",
-  username: "postgres",
-  password: "admin",
-  port: 5432,
+  database: config.POSTGRESQL_DB,
+  username: config.POSTGRESQL_USERNAME,
+  password: config.POSTGRESQL_PASSWORD,
+  port: config.POSTGRESQL_PORT as number,
   logging: false,
 });
 export { sequelize };
