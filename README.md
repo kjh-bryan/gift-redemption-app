@@ -157,12 +157,6 @@ Bryan Kang - [Github](https://github.com/kjh-bryan)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-This project is submitted to [![Devpost][devpost]][devpost-url] as part of a hackathon project for the Microsoft AI Classroom Hackathon.
-
 [splash]: images/splash.png
 [signin]: images/signin_screen.png
 [register]: images/register_screen.png
