@@ -278,6 +278,17 @@ Required to download:
   - staff_pass_id is used as username, while team_name is hashed and used as password
   - Username can be ROLE_username or just username without ROLE (Login)
 
+## Improvements to be Made
+- Automated Testing: Expand test coverage by implementing automated unit tests, integration tests, and end-to-end tests for critical application functionalities.
+- Unit Testing: Extends the unit testings towards the frontend
+- Optimized Database Schema: Review and optimize the database schema to ensure efficient data storage and retrieval. Consider indexing frequently queried columns, normalizing the data structure where applicable, and implementing database constraints to maintain data integrity.
+  - Since Staff Pass ID have a consistent prefix pattern like "ROLE_", enabling to create more efficient database indexes that help speed up the retrieval of records based on specific column.
+- Redemption Features
+  - Redemption Scheduling: Allow administrators to schedule gift redemption sessions at specific dates and times, ensuring that representatives have ample opportunity to redeem their gifts without overcrowding or long wait times.
+  - Redemption Limits: Implement redemption limits for each team to ensure fair distribution of gifts and prevent over-representation from certain teams. Administrators can set limits based on factors such as team size or allocation quotas.
+  - Redemption Reminders: Send automated reminders to team representatives who have not yet redeemed their gifts as the redemption deadline approaches. This helps minimize the number of unclaimed gifts and encourages participation.
+  - Redemption History: Implement a feature that allows administrators to view the redemption history for each team. This provides transparency and accountability in the gift distribution process and helps track which teams have already redeemed their gifts.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap
