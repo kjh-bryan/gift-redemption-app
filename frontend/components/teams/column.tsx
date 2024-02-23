@@ -76,7 +76,7 @@ export const columns: ColumnDef<TeamProps>[] = [
   },
   {
     id: "actions",
-    cell: ({ row, table }) => {
+    cell: function Cell({ row, table }) {
       const teamRow = row.original;
       const [updateTeamModalOpen, setUpdateTeamModalOpen] = useState(false);
       const [updateTeam, setUpdateTeam] = useState<string>(teamRow.team_name);
