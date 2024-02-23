@@ -193,6 +193,11 @@ During the Christmas season, distributing gifts to teams within a department is 
 | --------------------------------------------------------- |
 | <img src="screensimages/27.NodeJS_Backend_Unit_Test.png" > |
 
+## ERD Diagram
+| dbdiagram.io               |
+| --------------------------------------------------------- |
+|![erd_diagram](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/f14971c3-5e79-4ba7-b703-b5a6abdc5528) |
+
 
 To have a better view of Gift Redemption App's functionalities, please visit this live [website](https://gift-redemption-app.vercel.app/).
 
