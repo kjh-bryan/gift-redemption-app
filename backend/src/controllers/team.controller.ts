@@ -3,6 +3,7 @@ import {
   createTeamService,
   getAllTeamsService,
   getTeamByNameService,
+  updateTeamService,
 } from "../services/team.service";
 
 export const getAllTeamNamesController = async (
@@ -47,6 +48,34 @@ export const createTeamController = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Error creating team: ", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const updateTeamController = async (req: Request, res: Response) => {
+  try {
+    const { team_name, new_team_name } = req.body;
+
+    const existingTeam = await getTeamByNameService(team_name);
+    if (!existingTeam) {
+      return res.status(404).json({ message: "Team Not Found" });
+    }
+
+    const updatedTeam = await updateTeamService(
+      team_name,
+      String(new_team_name),
+    );
+
+    if (!updatedTeam) {
+      return res.status(404).json({ message: "Team Not Updated" });
+    }
+
+    return res.status(200).json({
+      message: "Success",
+      data: updatedTeam,
+    });
+  } catch (error) {
+    console.error("Error updating team: ", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };

@@ -32,3 +32,19 @@ export const createTeamService = async (
   if (team) return team;
   return null;
 };
+
+export const updateTeamService = async (
+  team_name: string,
+  new_team_name: string,
+): Promise<number[] | null> => {
+  const team = await Team.update(
+    { team_name: new_team_name },
+    {
+      where: {
+        team_name,
+      },
+    },
+  );
+  if (team) return team;
+  return null;
+};
