@@ -52,6 +52,7 @@ export const updateTeamNameByStaffIdController = async (
       String(staff_pass_id),
       String(team_name),
     );
+    console.log("updatedUserTeam", updatedUserTeam);
 
     if (!updatedUserTeam) {
       return res.status(404).json({ message: "User Team Not Updated" });

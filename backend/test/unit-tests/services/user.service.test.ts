@@ -2,6 +2,7 @@ import { Op } from "sequelize";
 import { User, UserTeam } from "../../../src/models";
 import {
   createUserService,
+  deleteUserService,
   getAllUserService,
   getUserByUsernameService,
 } from "../../../src/services/user.service";
@@ -11,17 +12,19 @@ jest.mock("../../../src/models", () => ({
     findOne: jest.fn(),
     create: jest.fn(),
     findAll: jest.fn(),
+    destroy: jest.fn(),
   },
 }));
 
 describe("User Service", () => {
   describe("getAllUserService", () => {
     it("should return all users with their teams", async () => {
-      // Mock the data returned by findAll method
       const mockUsers = [
         {
           username: "user1",
-          // other user properties
+
+          role_name: "role1",
+          password: "user1",
           UserTeams: [
             {
               team_name: "team1",
@@ -31,7 +34,8 @@ describe("User Service", () => {
         },
         {
           username: "user2",
-          // other user properties
+          role_name: "role2",
+          password: "user2",
           UserTeams: [
             {
               team_name: "team2",
@@ -40,7 +44,6 @@ describe("User Service", () => {
           ],
         },
       ];
-      // Mock the implementation of findAll method to return the mockUsers
       (User.findAll as jest.MockedFunction<any>).mockResolvedValue(mockUsers);
 
       // Call the service function
@@ -136,6 +139,42 @@ describe("User Service", () => {
       const user = await createUserService("testuser", "password123", "user");
 
       expect(user).toBeNull();
+    });
+  });
+  describe("deleteUserService", () => {
+    it("should delete the user", async () => {
+      const affectedRows = 1;
+      (User.destroy as jest.MockedFunction<any>).mockResolvedValue(
+        affectedRows,
+      );
+
+      const result = await deleteUserService("testUser");
+
+      expect(User.destroy).toHaveBeenCalledWith({
+        where: {
+          username: {
+            [Op.endsWith]: "testUser",
+          },
+        },
+      });
+
+      expect(result).toEqual(affectedRows);
+    });
+
+    it("should return null if user does not exist", async () => {
+      (User.destroy as jest.MockedFunction<any>).mockResolvedValue(0);
+
+      const result = await deleteUserService("nonExistingUser");
+
+      expect(User.destroy).toHaveBeenCalledWith({
+        where: {
+          username: {
+            [Op.endsWith]: "nonExistingUser",
+          },
+        },
+      });
+
+      expect(result).toBeNull();
     });
   });
 });

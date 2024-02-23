@@ -1,13 +1,17 @@
 import { UserTeam } from "../../../src/models";
 import {
   createUserTeamService,
+  getAllUserTeamService,
   getUserTeamByStaffIdService,
+  updateUserTeamService,
 } from "../../../src/services/user-team.service";
 
 jest.mock("../../../src/models", () => ({
   UserTeam: {
     findOne: jest.fn(),
     create: jest.fn(),
+    update: jest.fn(),
+    findAll: jest.fn(),
   },
 }));
 
@@ -71,6 +75,52 @@ describe("UserTeam Service", () => {
       const userTeam = await createUserTeamService("12345", "TeamA");
 
       expect(userTeam).toBeNull();
+    });
+  });
+  describe("updateUserTeamService", () => {
+    it("should update the team_name of a user team", async () => {
+      const mockUpdatedUserTeam = { affectedRows: 1 };
+      (UserTeam.update as jest.MockedFunction<any>).mockResolvedValue(
+        mockUpdatedUserTeam,
+      );
+
+      const result = await updateUserTeamService(
+        "staff_pass_id_value",
+        "new_team_name",
+      );
+
+      expect(UserTeam.update).toHaveBeenCalledWith(
+        { team_name: "new_team_name" },
+        { where: { staff_pass_id: "staff_pass_id_value" } },
+      );
+
+      expect(result).toEqual(mockUpdatedUserTeam);
+    });
+  });
+  describe("getAllUserTeamService", () => {
+    it("should return all user teams", async () => {
+      // Mock the return value of the findAll method
+      const mockUserTeams = [{ team_name: "Team 1" }, { team_name: "Team 2" }]; // Mock user team data
+      (UserTeam.findAll as jest.MockedFunction<any>).mockResolvedValue(
+        mockUserTeams,
+      );
+
+      const result = await getAllUserTeamService();
+
+      expect(UserTeam.findAll).toHaveBeenCalled();
+
+      expect(result).toEqual(mockUserTeams);
+    });
+
+    it("should return null if no user teams are found", async () => {
+      // Mock the return value of the findAll method to return an empty array
+      (UserTeam.findAll as jest.MockedFunction<any>).mockResolvedValue(null);
+
+      const result = await getAllUserTeamService();
+
+      expect(UserTeam.findAll).toHaveBeenCalled();
+
+      expect(result).toBeNull();
     });
   });
 });

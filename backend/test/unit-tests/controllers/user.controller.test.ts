@@ -1,5 +1,6 @@
 import {
   createUserController,
+  deleteUserController,
   getAllUserController,
   getUserByUsernameController,
   loginController,
@@ -10,6 +11,7 @@ import {
 } from "../../../src/services/user-team.service";
 import {
   createUserService,
+  deleteUserService,
   getAllUserService,
   getUserByUsernameService,
 } from "../../../src/services/user.service";
@@ -32,6 +34,7 @@ jest.mock("../../../src/services/user.service", () => {
     getUserByUsernameService: jest.fn(),
     createUserService: jest.fn(),
     getAllUserService: jest.fn(),
+    deleteUserService: jest.fn(),
   };
 });
 
@@ -484,6 +487,111 @@ describe("User Controller", () => {
 
       await loginController(req, res);
 
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+    });
+  });
+
+  describe("deleteUserController", () => {
+    beforeAll(() => {
+      jest.spyOn(console, "error").mockImplementation(() => {});
+    });
+    afterAll(() => {
+      (console.error as jest.MockedFunction<any>).mockRestore();
+    });
+
+    afterEach(() => {
+      (console.error as jest.MockedFunction<any>).mockClear();
+    });
+
+    it("should return 200 and delete the user", async () => {
+      const currentUser = mockedData.users[0];
+
+      const req: any = { params: { username: currentUser.username } };
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getUserByUsernameService as jest.MockedFunction<any>).mockResolvedValue(
+        currentUser,
+      );
+
+      (deleteUserService as jest.MockedFunction<any>).mockResolvedValue(
+        currentUser,
+      );
+
+      await deleteUserController(req, res);
+
+      expect(getUserByUsernameService).toHaveBeenCalledWith(
+        currentUser.username,
+      );
+      expect(deleteUserService).toHaveBeenCalledWith(currentUser.username);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Success",
+        data: currentUser,
+      });
+    });
+
+    it("should return 401 if user not found", async () => {
+      const req: any = { params: { username: "NONEXISTENTUSER" } };
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getUserByUsernameService as jest.MockedFunction<any>).mockResolvedValue(
+        null,
+      );
+
+      await deleteUserController(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(res.json).toHaveBeenCalledWith({ message: "User Not Found" });
+    });
+    it("should return 401 if unable to delete user", async () => {
+      const currentUser = mockedData.users[1];
+      const req: any = { params: { username: currentUser.username } };
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getUserByUsernameService as jest.MockedFunction<any>).mockResolvedValue(
+        currentUser,
+      );
+      (deleteUserService as jest.MockedFunction<any>).mockResolvedValue(null);
+
+      await deleteUserController(req, res);
+
+      expect(getUserByUsernameService).toHaveBeenCalledWith(
+        currentUser.username,
+      );
+      expect(deleteUserService).toHaveBeenCalledWith(currentUser.username);
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Unable to delete User",
+      });
+    });
+
+    it("should return 500 if an error occurs", async () => {
+      const currentUser = mockedData.users[0];
+      const req: any = { params: { username: currentUser.username } };
+      const res: any = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+
+      (getUserByUsernameService as jest.MockedFunction<any>).mockRejectedValue(
+        new Error("Internal Server Error"),
+      );
+
+      await deleteUserController(req, res);
+      expect(getUserByUsernameService).toHaveBeenCalledWith(
+        currentUser.username,
+      );
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
     });

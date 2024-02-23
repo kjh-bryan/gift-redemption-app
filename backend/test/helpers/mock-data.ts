@@ -101,4 +101,14 @@ export const mockedData = {
       ],
     },
   ],
+  userTeam: [
+    {
+      staff_pass_id: "STAFF",
+      team_name: "GRYFFINDOR",
+    },
+    {
+      staff_pass_id: "MANAGER",
+      team_name: "SLYTHERIN",
+    },
+  ],
 };

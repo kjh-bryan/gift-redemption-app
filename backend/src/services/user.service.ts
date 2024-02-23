@@ -55,5 +55,5 @@ export const deleteUserService = async (
     },
   });
   if (user) return user;
-  return user;
+  return null;
 };

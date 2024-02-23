@@ -21,17 +21,16 @@ export const getAllUserController = async (req: Request, res: Response) => {
     }
 
     const flattenedUsers = users.map((user: any) => {
-      const { username, password, role_name, UserTeams } = user;
+      const { username, role_name, UserTeams } = user;
 
-      const { team_name, created_at } = UserTeams[0]; // Assuming each user has only one team
+      const { team_name, created_at } = UserTeams[0];
       return {
         username,
         role_name,
-        team_name: team_name ?? "UNASSIGNED",
+        team_name: team_name,
         created_at,
       };
     });
-    // console.log(flattenedUsers);
     return res.status(200).json({
       message: "Success",
       data: flattenedUsers,

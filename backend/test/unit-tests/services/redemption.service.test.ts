@@ -1,5 +1,6 @@
 import { Redemption } from "../../../src/models";
 import {
+  getAllRedemptionService,
   redeemGiftService,
   verifyRedemptionStatusService,
 } from "../../../src/services/redemption.service";
@@ -7,6 +8,7 @@ import {
 jest.mock("../../../src/models", () => ({
   Redemption: {
     findOne: jest.fn(),
+    findAll: jest.fn(),
     create: jest.fn(),
   },
 }));
@@ -89,6 +91,34 @@ describe("Redemption Service", () => {
       const redemption = await redeemGiftService("GiftA", "TeamA");
 
       expect(redemption).toBeNull();
+    });
+  });
+
+  describe("getAllRedemptionService", () => {
+    it("should return all redemptions", async () => {
+      const mockRedemptions = [
+        { gift_name: "Redemption 1", team_name: "TeamA" },
+        { gift_name: "Redemption 2", team_name: "TeamB" },
+      ];
+      (Redemption.findAll as jest.MockedFunction<any>).mockResolvedValue(
+        mockRedemptions,
+      );
+
+      const result = await getAllRedemptionService();
+
+      expect(Redemption.findAll).toHaveBeenCalledWith({ where: {} });
+
+      expect(result).toEqual(mockRedemptions);
+    });
+
+    it("should return null if no redemptions are found", async () => {
+      (Redemption.findAll as jest.MockedFunction<any>).mockResolvedValue(null);
+
+      const result = await getAllRedemptionService();
+
+      expect(Redemption.findAll).toHaveBeenCalledWith({ where: {} });
+
+      expect(result).toBeNull();
     });
   });
 });

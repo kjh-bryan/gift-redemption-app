@@ -35,7 +35,6 @@ export const createTeamController = async (req: Request, res: Response) => {
       return res.status(409).json({ message: "Team Already Exists" });
     }
 
-    console.log("existingTeam :>> ", existingTeam);
     const newTeam = await createTeamService(String(team_name));
 
     if (!newTeam) {
