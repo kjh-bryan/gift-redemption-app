@@ -33,8 +33,8 @@ During the Christmas season, distributing gifts to teams within a department is 
 
 ## Features
 
-- NextJS(Frontend) + NodeJS(Backend)
-- Fullstack Authentication with JWT
+- NextJS(Frontend) + NodeJS(Backend) + PostgreSQL(Database)
+- Fullstack Authentication with JWT & [Zod Validation](https://zod.dev/)
   - Login/Register Screen
     - Lookup Team using Staff Pass ID
   - Dashboard Screen
@@ -45,23 +45,34 @@ During the Christmas season, distributing gifts to teams within a department is 
     - Display Users
     - Change User Team
     - Delete User
+  - Teams Screen (Admin)
+    - Display Teams
+    - Change Team Name
+    - Create New Team
 
 ### Built With
 
 - [![Express][express.dev]][express-url]
 - ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) Hosted on ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
-- [![NodeJS][node.dev]][node-url] Hosted on (https://render.com)
-- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) Hosted on (https://render.com)
+- [![NodeJS][node.dev]][node-url] Hosted on ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) Hosted on ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 - ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+- ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+- ![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/344119c0-55f9-4e90-911a-1c69a98c7c54)
 
 ### Additional Features
 
 - [![JWT][jwt.dev]][jwt-url]
+- <img src="https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/b07bbcc0-8b36-45e7-9a65-e03f12d61907" alt="Logo" width="60" >
+
 
 ### Linters
 
 - [![ESLint][eslint.dev]][eslint-url]
 - [![Prettier][prettier.dev]][prettier-url]
+
+### Testing
+- ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 
 ### Screens
 
@@ -105,6 +116,38 @@ During the Christmas season, distributing gifts to teams within a department is 
 | -------------------------------------------------------------------- |
 | <img src="screensimages/9_GiftScreen_Admin_CreateGift_Success.png" > |
 
+| Admin User Screen                                       |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/19_Admin_UserScreen.png" > |
+
+| Admin Search User By Staff ID                                       |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/20_Admin_UserScreen_SearchStaffID.png" > |
+
+| Admin User Screen Actions (Change Team, Delete User)                                     |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/21_Admin_UserScreen_Actions.png" > |
+
+| Admin Change User's Team                                   |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/22_Admin_UserScreen_ChangeTeam.png" > |
+
+| Admin Delete User                                 |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/23_Admin_UserScreen_DeleteUser.png" > |
+
+| Admin Team Screen (Update Team Name, Create Team)                |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/24_Admin_TeamsScreen.png" > |
+
+| Admin Update Team Name                                |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/25_Admin_TeamsScreen_UpdateTeamName.png" > |
+
+| Admin Create Team                                  |
+| -------------------------------------------------------------------- |
+| <img src="screensimages/26_Admin_TeamsScreen_CreateTeamName.png" > |
+
 ## User (Unassigned Team)
 
 | User Dashboard (General)                         |
@@ -125,23 +168,36 @@ During the Christmas season, distributing gifts to teams within a department is 
 | ------------------------------------------------------- |
 | <img src="screensimages/14_GiftScreen_RedeemGift.png" > |
 
-## API Endpoints
+## API Endpoints (Tasks)
 
-| Get Staff Mapping                                |
+| Get Staff Mapping (Tasks 1)                                |
 | ------------------------------------------------ |
 | <img src="screensimages/15_GetStaffMaping.png" > |
 
-| Verify Redemption                                  |
+| Verify Redemption  (Tasks 2)                                   |
 | -------------------------------------------------- |
 | <img src="screensimages/16_VerifyRedemption.png" > |
 
-| Redeem Gift                                  |
+| Redeem Gift (Tasks 3)             |
 | -------------------------------------------- |
 | <img src="screensimages/17_RedeemGift.png" > |
 
-| Redemption Data                                           |
+| Redemption Data  (Tasks 3)                   |
 | --------------------------------------------------------- |
+|![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/f75aa113-8859-43d7-ba03-1a5d7228dc41)|
 | <img src="screensimages/18_Database_RedemptionData.png" > |
+
+## Unit Tests 
+
+| NodeJS Backend                  |
+| --------------------------------------------------------- |
+| <img src="screensimages/27.NodeJS_Backend_Unit_Test.png" > |
+
+## ERD Diagram
+| dbdiagram.io               |
+| --------------------------------------------------------- |
+|![erd_diagram](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/f14971c3-5e79-4ba7-b703-b5a6abdc5528) |
+
 
 To have a better view of Gift Redemption App's functionalities, please visit this live [website](https://gift-redemption-app.vercel.app/).
 
@@ -212,9 +268,15 @@ Required to download:
 
 ## Assumptions
 
-- staff_pass_id is used as username, while team_name is hashed and used as passsword
-- Gifts are unique to the team
-- Username can be ROLE_username or just username without ROLE
+- Single Team Redemption: Each team can only redeem one gift, and once redeemed, they cannot redeem another gift. This assumption aligns with the task's requirement that "each team can send any representative to redeem their team's gift." This implies that once a team has redeemed its gift, subsequent attempts by any representative from the same team would be denied.
+- Authentication and Authorization: Authentication and authorization are necessary for accessing the system and performing actions such as redeeming gifts or modifying user/team data. This is indicated by the use of JWT (JSON Web Tokens) for authentication and the presence of admin functionalities for managing users and teams.
+- Database Storage: PostgreSQL as the database system for storing data related to users, teams, and redemptions. Assuming a relational data model would be suitable for the application's requirements as it provides robust support for maintaining data integrity and enforcing relationships between different entities (such as users, teams, and redemptions). This is crucial for ensuring that each user is associated with only one team and that redemptions are linked accurately to their respective teams.
+- Timestamp Handling: Timestamp information is crucial for tracking when mapping records were added and when redemptions occurred. This is evident from the task's requirement to compare timestamps for verifying eligibility and adding new redemptions. Therefore, storing timestamps in the database for consistency and ease of comparison.
+- Frontend-Backend Separation: Separated the frontend (Next.js) from the backend (Node.js) to enhance modularity and maintainability. This division allows for easier scaling and future modifications, as changes to one component (e.g., frontend UI) would not directly impact the other (e.g., backend logic).
+- Error Handling: To have the necessity of error handling mechanisms, including validation of user input, handling of database errors, and providing meaningful error messages to users. This ensures the robustness and reliability of the application.
+- Miscellaneous
+  - staff_pass_id is used as username, while team_name is hashed and used as password
+  - Username can be ROLE_username or just username without ROLE (Login)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -224,6 +286,9 @@ Required to download:
 - [x] Register Screen
 - [x] Dashboard Screen
 - [x] Gift Screen
+- [x] Admin Actions
+  - [x] Users Screen
+  - [x] Teams Screen
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
