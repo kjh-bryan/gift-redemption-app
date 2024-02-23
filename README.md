@@ -41,6 +41,10 @@ During the Christmas season, distributing gifts to teams within a department is 
   - Gift Screen
     - Redemption Verification
     - Redeem Gift
+  - Users Screen (Admin)
+    - Display Users
+    - Change User Team
+    - Delete User
 
 ### Built With
 
@@ -145,7 +149,6 @@ Please take note while trying out due to limited resources, request from backend
 
 ![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/8558c77c-a821-4941-b6b2-0cd1c7c634cb)
 
-
 ## Getting Started
 
 Required to download:
@@ -211,7 +214,7 @@ Required to download:
 
 - staff_pass_id is used as username, while team_name is hashed and used as passsword
 - Gifts are unique to the team
-- Username will always start with ROLE_username
+- Username can be ROLE_username or just username without ROLE
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
