@@ -28,3 +28,14 @@ export const redeemGiftService = async (
   if (redemption) return redemption;
   return null;
 };
+
+export const getAllRedemptionService = async (): Promise<
+  Redemption[] | null
+> => {
+  const redemptions = await Redemption.findAll({
+    where: {},
+  });
+
+  if (redemptions) return redemptions;
+  return null;
+};

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createUserTeamService,
+  getAllUserTeamService,
   getUserTeamByStaffIdService,
   updateUserTeamService,
 } from "../services/user-team.service";
@@ -62,6 +63,22 @@ export const updateTeamNameByStaffIdController = async (
     });
   } catch (error) {
     console.error("Error updating user team details: ", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const getAllUserTeamController = async (req: Request, res: Response) => {
+  try {
+    const userTeams = await getAllUserTeamService();
+    if (!userTeams) {
+      return res.status(404).json({ message: "User Teams Not Found" });
+    }
+    return res.status(200).json({
+      message: "Success",
+      data: userTeams,
+    });
+  } catch (error) {
+    console.error("Error fetching all user teams: ", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };

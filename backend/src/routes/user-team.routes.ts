@@ -1,4 +1,5 @@
 import {
+  getAllUserTeamController,
   getStaffMappingByStaffIdController,
   updateTeamNameByStaffIdController,
 } from "../controllers/user-team.controller";
@@ -21,5 +22,6 @@ router.put(
   validateSchema(UpdateUserDTO),
   updateTeamNameByStaffIdController,
 );
+router.get("/", verifyToken, getAllUserTeamController);
 
 export default router;

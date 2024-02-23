@@ -37,3 +37,10 @@ export const updateUserTeamService = async (
 
   return userTeam;
 };
+
+export const getAllUserTeamService = async () => {
+  const userTeam = await UserTeam.findAll();
+
+  if (userTeam) return userTeam;
+  return null;
+};

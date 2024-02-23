@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getRedemptionByTeamController,
   redeemGiftController,
   verifyRedemptionController,
 } from "../controllers/redemption.controller";
@@ -25,4 +26,5 @@ router.get(
 
 router.post("/redeem", validateSchema(RedemptionDTO), redeemGiftController);
 
+router.get("/redeems", getRedemptionByTeamController);
 export default router;

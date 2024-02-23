@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  getAllRedemptionService,
   redeemGiftService,
   verifyRedemptionStatusService,
 } from "../services/redemption.service";
@@ -45,6 +46,22 @@ export const redeemGiftController = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error("Error redeeming gift: ", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const getRedemptionByTeamController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const redemption = await getAllRedemptionService();
+    if (!redemption)
+      return res.status(400).json({ message: "Unable to fetch redemption" });
+
+    return res.status(200).json({ message: "Success", data: redemption });
+  } catch (error) {
+    console.error("Error fetching redemption: ", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
