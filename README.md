@@ -263,9 +263,15 @@ Required to download:
 
 ## Assumptions
 
-- staff_pass_id is used as username, while team_name is hashed and used as password
-- Username can be ROLE_username or just username without ROLE (Login)
-- Gifts are unique to the team
+- Single Team Redemption: Each team can only redeem one gift, and once redeemed, they cannot redeem another gift. This assumption aligns with the task's requirement that "each team can send any representative to redeem their team's gift." This implies that once a team has redeemed its gift, subsequent attempts by any representative from the same team would be denied.
+- Authentication and Authorization: Authentication and authorization are necessary for accessing the system and performing actions such as redeeming gifts or modifying user/team data. This is indicated by the use of JWT (JSON Web Tokens) for authentication and the presence of admin functionalities for managing users and teams.
+- Database Storage: PostgreSQL as the database system for storing data related to users, teams, and redemptions. Assuming a relational data model would be suitable for the application's requirements as it provides robust support for maintaining data integrity and enforcing relationships between different entities (such as users, teams, and redemptions). This is crucial for ensuring that each user is associated with only one team and that redemptions are linked accurately to their respective teams.
+- Timestamp Handling: Timestamp information is crucial for tracking when mapping records were added and when redemptions occurred. This is evident from the task's requirement to compare timestamps for verifying eligibility and adding new redemptions. Therefore, storing timestamps in the database for consistency and ease of comparison.
+- Frontend-Backend Separation: Separated the frontend (Next.js) from the backend (Node.js) to enhance modularity and maintainability. This division allows for easier scaling and future modifications, as changes to one component (e.g., frontend UI) would not directly impact the other (e.g., backend logic).
+- Error Handling: To have the necessity of error handling mechanisms, including validation of user input, handling of database errors, and providing meaningful error messages to users. This ensures the robustness and reliability of the application.
+- Miscellaneous
+  - staff_pass_id is used as username, while team_name is hashed and used as password
+  - Username can be ROLE_username or just username without ROLE (Login)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
