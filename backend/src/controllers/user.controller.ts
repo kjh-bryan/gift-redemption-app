@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createUserService,
+  deleteUserService,
   getAllUserService,
   getUserByUsernameService,
 } from "../services/user.service";
@@ -152,6 +153,27 @@ export const loginController = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Error logging in: ", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const deleteUserController = async (req: Request, res: Response) => {
+  try {
+    const { username } = req.params;
+    const user = await getUserByUsernameService(username);
+    if (!user) {
+      return res.status(401).json({ message: "User Not Found" });
+    }
+    const deletedUser = await deleteUserService(username);
+    if (!deletedUser) {
+      return res.status(401).json({ message: "Unable to delete User" });
+    }
+    return res.status(200).json({
+      message: "Success",
+      data: deletedUser,
+    });
+  } catch (error) {
+    console.error("Error deleting user: ", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };

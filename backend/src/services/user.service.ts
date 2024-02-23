@@ -43,3 +43,17 @@ export const createUserService = async (
   if (user) return user;
   return null;
 };
+
+export const deleteUserService = async (
+  username: string,
+): Promise<number | null> => {
+  const user = await User.destroy({
+    where: {
+      username: {
+        [Op.endsWith]: username,
+      },
+    },
+  });
+  if (user) return user;
+  return user;
+};

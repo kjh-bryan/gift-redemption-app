@@ -21,3 +21,19 @@ export const createUserTeamService = async (
   if (userTeam) return userTeam;
   return null;
 };
+
+export const updateUserTeamService = async (
+  staff_pass_id: string,
+  team_name: string,
+) => {
+  const userTeam = await UserTeam.update(
+    { team_name: team_name },
+    {
+      where: {
+        staff_pass_id: staff_pass_id,
+      },
+    },
+  );
+
+  return userTeam;
+};

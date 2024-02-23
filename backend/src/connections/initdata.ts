@@ -9,15 +9,18 @@ import bcrypt from "bcryptjs";
 
 export const intialiseAssociations = async () => {
   console.log("Defining Table Associations");
-  User.hasMany(UserTeam, { foreignKey: "staff_pass_id" });
-  Team.hasMany(UserTeam, { foreignKey: "team_name" });
+  User.hasMany(UserTeam, { foreignKey: "staff_pass_id", onDelete: "CASCADE" });
+  Team.hasMany(UserTeam, {
+    foreignKey: "team_name",
+    onUpdate: "CASCADE",
+  });
   UserTeam.belongsTo(User, { foreignKey: "staff_pass_id" });
   UserTeam.belongsTo(Team, { foreignKey: "team_name" });
 
   User.belongsTo(Role, { foreignKey: "role_name", targetKey: "role_name" });
   Role.hasOne(User, { foreignKey: "role_name", sourceKey: "role_name" });
 
-  Team.hasMany(Redemption, { foreignKey: "team_name" });
+  Team.hasMany(Redemption, { foreignKey: "team_name", onUpdate: "CASCADE" });
   Redemption.belongsTo(Team, { foreignKey: "team_name" });
 
   Gift.hasOne(Redemption, { foreignKey: "gift_name" });
