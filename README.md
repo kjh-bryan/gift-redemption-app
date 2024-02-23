@@ -24,9 +24,58 @@
    <!-- <a href="">View Demo</a> -->
   </p>
 </div>
+</br>
+</br>
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#built-with">Built With</a></li>
+        <li>
+          <ul>
+            <li><a href="#additional-features">Additional Features</a></li>
+            <li><a href="#linters">Linters</a></li>
+            <li><a href="#testing">Testing</a></li>
+          </ul>
+        </li>
+    <li>
+      <a href="#screens">Screens</a>
+       <ul>
+          <li><a href="#login/register">Login/Register</a></li>
+          <li><a href="#admin">Admin</a></li>
+          <li><a href="#user-(unassigned-team)">User (Unassigned Team)</a></li>
+          <li><a href="#user-(assigned-team)">User (Assigned Team)</a></li>
+          <li><a href="#api-endpoints-(tasks)">API Endpoints (Tasks)</a></li>
+          <li><a href="#unit-tests">Unit Tests</a></li>
+          <li><a href="#erd-diagram">ERD Diagram</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#guides-on-installation">Guides on Installation</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#assumptions">Assumptions</a></li>
+    <li><a href="#improvements-to-be-made">Improvements to be Made</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <!--<li><a href="#contributing">Contributing</a></li>-->
+    <!--<li><a href="#license">License</a></li>-->
+    <li><a href="#contact">Contact</a></li>
+    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li>-->
+  </ol>
+</details>
+
+</br>
+</br>
 <!-- ABOUT THE PROJECT -->
-
+<a name="about-the-project"></a>
 ## About The Project
 
 During the Christmas season, distributing gifts to teams within a department is a common practice. However, it's essential to manage the process efficiently and fairly. This system provides a solution for this purpose.
@@ -50,8 +99,9 @@ During the Christmas season, distributing gifts to teams within a department is 
     - Change Team Name
     - Create New Team
 
-### Built With
+## Built With
 
+  <a name="built-with"></a>
 - [![Express][express.dev]][express-url]
 - ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) Hosted on ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 - [![NodeJS][node.dev]][node-url] Hosted on ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
@@ -61,7 +111,7 @@ During the Christmas season, distributing gifts to teams within a department is 
 - ![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/344119c0-55f9-4e90-911a-1c69a98c7c54)
 
 ### Additional Features
-
+<a name="additional-features"></a>
 - [![JWT][jwt.dev]][jwt-url]
 - <img src="https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/b07bbcc0-8b36-45e7-9a65-e03f12d61907" alt="Logo" width="60" >
 
@@ -74,9 +124,9 @@ During the Christmas season, distributing gifts to teams within a department is 
 ### Testing
 - ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 
-### Screens
+## Screens
 
-## Login/Register
+### Login/Register
 
 | Login Screen                                 |
 | -------------------------------------------- |
@@ -98,7 +148,7 @@ During the Christmas season, distributing gifts to teams within a department is 
 | ---------------------------------------------------------- |
 | <img src="screensimages/5_RegisterScreen_Successful.png" > |
 
-## Admin
+### Admin
 
 | Admin Dashboard Screen                                 |
 | ------------------------------------------------------ |
@@ -148,7 +198,7 @@ During the Christmas season, distributing gifts to teams within a department is 
 | -------------------------------------------------------------------- |
 | <img src="screensimages/26_Admin_TeamsScreen_CreateTeamName.png" > |
 
-## User (Unassigned Team)
+### User (Unassigned Team)
 
 | User Dashboard (General)                         |
 | ------------------------------------------------ |
@@ -158,7 +208,7 @@ During the Christmas season, distributing gifts to teams within a department is 
 | ------------------------------------------------------------ |
 | <img src="screensimages/12_GiftScreen_Unassigned_Team.png" > |
 
-## User (Assigned Team)
+### User (Assigned Team)
 
 | User Gift Screen                                           |
 | ---------------------------------------------------------- |
@@ -168,7 +218,7 @@ During the Christmas season, distributing gifts to teams within a department is 
 | ------------------------------------------------------- |
 | <img src="screensimages/14_GiftScreen_RedeemGift.png" > |
 
-## API Endpoints (Tasks)
+### API Endpoints (Tasks)
 
 | Get Staff Mapping (Tasks 1)                                |
 | ------------------------------------------------ |
@@ -187,13 +237,13 @@ During the Christmas season, distributing gifts to teams within a department is 
 |![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/f75aa113-8859-43d7-ba03-1a5d7228dc41)|
 | <img src="screensimages/18_Database_RedemptionData.png" > |
 
-## Unit Tests 
+### Unit Tests 
 
 | NodeJS Backend                  |
 | --------------------------------------------------------- |
 | <img src="screensimages/27.NodeJS_Backend_Unit_Test.png" > |
 
-## ERD Diagram
+### ERD Diagram
 | dbdiagram.io               |
 | --------------------------------------------------------- |
 |![erd_diagram](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/f14971c3-5e79-4ba7-b703-b5a6abdc5528) |
@@ -212,7 +262,7 @@ Required to download:
 - NodeJS -> https://nodejs.org/en
 - PostgreSQL -> https://www.postgresql.org/download/
 
-## Guides on Installation
+### Guides on Installation
 
 - Setting Up PostgreSQL -> https://www.youtube.com/watch?v=IYHx0ovvxPs
 
@@ -273,7 +323,6 @@ Required to download:
 - Database Storage: PostgreSQL as the database system for storing data related to users, teams, and redemptions. Assuming a relational data model would be suitable for the application's requirements as it provides robust support for maintaining data integrity and enforcing relationships between different entities (such as users, teams, and redemptions). This is crucial for ensuring that each user is associated with only one team and that redemptions are linked accurately to their respective teams.
 - Timestamp Handling: Timestamp information is crucial for tracking when mapping records were added and when redemptions occurred. This is evident from the task's requirement to compare timestamps for verifying eligibility and adding new redemptions. Therefore, storing timestamps in the database for consistency and ease of comparison.
 - Frontend-Backend Separation: Separated the frontend (Next.js) from the backend (Node.js) to enhance modularity and maintainability. This division allows for easier scaling and future modifications, as changes to one component (e.g., frontend UI) would not directly impact the other (e.g., backend logic).
-- Error Handling: To have the necessity of error handling mechanisms, including validation of user input, handling of database errors, and providing meaningful error messages to users. This ensures the robustness and reliability of the application.
 - Miscellaneous
   - staff_pass_id is used as username, while team_name is hashed and used as password
   - Username can be ROLE_username or just username without ROLE (Login)
