@@ -28,29 +28,27 @@
 </br>
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
+<details >
+  <summary ><h2>Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
     </li>
         <li><a href="#features">Features</a></li>
         <li><a href="#built-with">Built With</a></li>
-        <li>
           <ul>
             <li><a href="#additional-features">Additional Features</a></li>
             <li><a href="#linters">Linters</a></li>
             <li><a href="#testing">Testing</a></li>
           </ul>
-        </li>
     <li>
       <a href="#screens">Screens</a>
        <ul>
-          <li><a href="#login/register">Login/Register</a></li>
+          <li><a href="#loginregister">Login/Register</a></li>
           <li><a href="#admin">Admin</a></li>
-          <li><a href="#user-(unassigned-team)">User (Unassigned Team)</a></li>
-          <li><a href="#user-(assigned-team)">User (Assigned Team)</a></li>
-          <li><a href="#api-endpoints-(tasks)">API Endpoints (Tasks)</a></li>
+          <li><a href="#user-unassigned-team">User (Unassigned Team)</a></li>
+          <li><a href="#user-assigned-team">User (Assigned Team)</a></li>
+          <li><a href="#api-endpoints-tasks">API Endpoints (Tasks)</a></li>
           <li><a href="#unit-tests">Unit Tests</a></li>
           <li><a href="#erd-diagram">ERD Diagram</a></li>
       </ul>
@@ -75,7 +73,7 @@
 </br>
 </br>
 <!-- ABOUT THE PROJECT -->
-<a name="about-the-project"></a>
+
 ## About The Project
 
 During the Christmas season, distributing gifts to teams within a department is a common practice. However, it's essential to manage the process efficiently and fairly. This system provides a solution for this purpose.
@@ -99,6 +97,8 @@ During the Christmas season, distributing gifts to teams within a department is 
     - Change Team Name
     - Create New Team
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Built With
 
   <a name="built-with"></a>
@@ -109,9 +109,10 @@ During the Christmas season, distributing gifts to teams within a department is 
 - ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
 - ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 - ![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/344119c0-55f9-4e90-911a-1c69a98c7c54)
+  
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Additional Features
-<a name="additional-features"></a>
 - [![JWT][jwt.dev]][jwt-url]
 - <img src="https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/b07bbcc0-8b36-45e7-9a65-e03f12d61907" alt="Logo" width="60" >
 
@@ -123,10 +124,14 @@ During the Christmas season, distributing gifts to teams within a department is 
 
 ### Testing
 - ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
+  
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Screens
 
 ### Login/Register
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 | Login Screen                                 |
 | -------------------------------------------- |
@@ -149,6 +154,8 @@ During the Christmas season, distributing gifts to teams within a department is 
 | <img src="screensimages/5_RegisterScreen_Successful.png" > |
 
 ### Admin
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 | Admin Dashboard Screen                                 |
 | ------------------------------------------------------ |
@@ -198,6 +205,8 @@ During the Christmas season, distributing gifts to teams within a department is 
 | -------------------------------------------------------------------- |
 | <img src="screensimages/26_Admin_TeamsScreen_CreateTeamName.png" > |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### User (Unassigned Team)
 
 | User Dashboard (General)                         |
@@ -208,6 +217,8 @@ During the Christmas season, distributing gifts to teams within a department is 
 | ------------------------------------------------------------ |
 | <img src="screensimages/12_GiftScreen_Unassigned_Team.png" > |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### User (Assigned Team)
 
 | User Gift Screen                                           |
@@ -217,6 +228,8 @@ During the Christmas season, distributing gifts to teams within a department is 
 | User Redeem Gift                                        |
 | ------------------------------------------------------- |
 | <img src="screensimages/14_GiftScreen_RedeemGift.png" > |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### API Endpoints (Tasks)
 
@@ -237,6 +250,8 @@ During the Christmas season, distributing gifts to teams within a department is 
 |![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/f75aa113-8859-43d7-ba03-1a5d7228dc41)|
 | <img src="screensimages/18_Database_RedemptionData.png" > |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Unit Tests 
 
 | NodeJS Backend                  |
@@ -254,6 +269,9 @@ To have a better view of Gift Redemption App's functionalities, please visit thi
 Please take note while trying out due to limited resources, request from backend may be delayed
 
 ![image](https://github.com/kjh-bryan/gift-redemption-app/assets/30686810/8558c77c-a821-4941-b6b2-0cd1c7c634cb)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 
@@ -315,6 +333,8 @@ Required to download:
    ```js
    npm start
    ```
+   
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Assumptions
 
@@ -326,6 +346,8 @@ Required to download:
 - Miscellaneous
   - staff_pass_id is used as username, while team_name is hashed and used as password
   - Username can be ROLE_username or just username without ROLE (Login)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Improvements to be Made
 - Automated Testing: Expand test coverage by implementing automated unit tests, integration tests, and end-to-end tests for critical application functionalities.
