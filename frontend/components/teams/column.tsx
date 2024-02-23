@@ -59,7 +59,7 @@ export const columns: ColumnDef<TeamProps>[] = [
   {
     accessorKey: "team_name",
     header: "Team",
-    cell: ({ row }) => {
+    cell: function Cell({ row }) {
       return (
         <div className="flex gap-2 items-center">
           <img

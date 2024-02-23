@@ -101,7 +101,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     id: "actions",
-    cell: ({ row, table }) => {
+    cell: function Cell({ row, table }) {
       const user = row.original;
       const [changeTeamModalOpen, setChangeTeamModalOpen] = useState(false);
       const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
