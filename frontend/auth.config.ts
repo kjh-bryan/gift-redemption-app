@@ -10,7 +10,6 @@ export default {
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
-
         if (validatedFields.success) {
           const { username, password } = validatedFields.data;
 

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import { getUserByUsername } from "./app/api/user";
+import { logout } from "./actions/logout";
 
 export const {
   handlers: { GET, POST },

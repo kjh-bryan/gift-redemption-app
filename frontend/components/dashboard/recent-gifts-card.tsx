@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 
-export type SalesProps = {
-  name: string;
-  email: string;
-  saleAmount: string;
+export type GiftProps = {
+  gift_name: string;
+  created_at: string;
 };
 
-export default function SalesCard(props: SalesProps) {
+export default function RecentGiftCards(props: GiftProps) {
   return (
     <div className="  flex flex-wrap justify-between gap-3 ">
       <section className="flex justify-between gap-3 ">
@@ -15,18 +14,15 @@ export default function SalesCard(props: SalesProps) {
           <img
             width={200}
             height={200}
-            src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${props.name}`}
+            src="images/gift_unredeemed.png"
             alt="avatar"
           />
         </div>
         <div className="text-sm">
-          <p>{props.name}</p>
-          <div className="text-ellipsis overflow-hidden whitespace-nowrap w-[120px]  sm:w-auto  text-gray-400">
-            {props.email}
-          </div>
+          <p>{props.gift_name}</p>
         </div>
       </section>
-      <p>{props.saleAmount}</p>
+      <p>{new Date(props.created_at).toLocaleString()}</p>
     </div>
   );
 }

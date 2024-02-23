@@ -12,7 +12,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { usePathname } from "next/navigation";
-import { signOut } from "@/auth";
 import { LogoutButton } from "../auth/logout-button";
 import { NavLink } from "../dashboard/side-nav-bar";
 

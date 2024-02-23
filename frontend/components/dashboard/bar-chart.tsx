@@ -1,6 +1,7 @@
 /** @format */
 "use client";
-import React from "react";
+import { getAllUserTeams } from "@/app/api/user-team";
+import React, { use, useEffect, useState } from "react";
 import {
   BarChart as BarGraph,
   ResponsiveContainer,
@@ -9,7 +10,10 @@ import {
   Bar,
 } from "recharts";
 
-type Props = {};
+type Props = {
+  data?: any[];
+  monthsTotal?: any[];
+};
 
 const data = [
   {
@@ -63,11 +67,40 @@ const data = [
 ];
 
 export default function BarChart({}: Props) {
+  const [barData, setBarData] = useState<
+    {
+      name: string;
+      total: number;
+    }[]
+  >();
+
+  useEffect(() => {
+    (async () => {
+      const responseUserTeam = await getAllUserTeams();
+      const dataUserTeam = responseUserTeam.data.data;
+
+      const monthsTotal = Array(12).fill(0);
+
+      dataUserTeam.forEach((userTeam: any) => {
+        const monthIndex = new Date(userTeam.created_at).getMonth(); // Get the month index (0-11) from the 'created_at' date
+        monthsTotal[monthIndex] += 1; // Increment the total for the corresponding month
+      });
+      const updatedData = data.map((monthData, index) => {
+        return {
+          name: monthData,
+          total: monthsTotal[index],
+        };
+      });
+      console.log("monthsTotal", monthsTotal);
+      console.log("updatedData", updatedData);
+      setBarData(updatedData as any);
+    })();
+  }, []);
   return (
     <ResponsiveContainer width={"100%"} height={350}>
-      <BarGraph data={data}>
+      <BarGraph data={barData}>
         <XAxis
-          dataKey={"name"}
+          dataKey={"name.name"}
           tickLine={false}
           axisLine={false}
           stroke="#888888"
@@ -78,7 +111,7 @@ export default function BarChart({}: Props) {
           axisLine={false}
           stroke="#888888"
           fontSize={12}
-          tickFormatter={(value: any) => `$${value}`}
+          tickFormatter={(value: any) => `${value}`}
         />
         <Bar dataKey={"total"} radius={[4, 4, 0, 0]} />
       </BarGraph>

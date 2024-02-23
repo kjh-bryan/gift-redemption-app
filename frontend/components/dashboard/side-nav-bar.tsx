@@ -85,7 +85,7 @@ export default function SideNavbar() {
           },
           {
             title: "Logout",
-            href: "/logout",
+            href: "api/auth/logout",
             icon: LogOut,
             variant: "ghost",
             role: "public",
@@ -110,17 +110,6 @@ export default function SideNavbar() {
   }, [session.data]);
   return (
     <div className={cn("relative min-w-[80px] px-3 pb-10 pt-8")}>
-      {!mobileWidth && (
-        <div className={cn("absolute right-[-20px] top-7")}>
-          <Button
-            variant="ghost"
-            className={cn("rounded-full p-2")}
-            onClick={toggleSidebar}
-          >
-            {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
-          </Button>
-        </div>
-      )}
       <div
         className={cn(
           "flex h-[52px] items-center justify-center px-4",

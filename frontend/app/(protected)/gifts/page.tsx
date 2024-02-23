@@ -16,7 +16,6 @@ export default function GiftPage({}: Props) {
   useEffect(() => {
     (async () => {
       const giftData = await getAllGifts();
-      console.log("giftData", giftData.data.data);
       if (giftData.status === 200) {
         setGifts(giftData.data.data);
       }
